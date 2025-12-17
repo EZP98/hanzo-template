@@ -397,7 +397,7 @@ function LogoTicker() {
   )
 }
 
-// Image Showcase - Infinite vertical scrolling tickers
+// Image Showcase - Framer Exact Replica
 function ImageShowcase() {
   const [isHovered, setIsHovered] = useState(false)
 
@@ -422,20 +422,40 @@ function ImageShowcase() {
   const tickerY = useTransform(scrollYProgress, [0, 1], [0, 400])
 
   return (
-    <section ref={ref} id="intro" className="py-20 px-4 sm:px-6 overflow-hidden relative">
-      <div className="max-w-5xl mx-auto relative">
-        {/* Two Column Tickers */}
+    <section ref={ref} id="intro" className="px-4 sm:px-6 py-8">
+      {/* Dark container with rounded corners */}
+      <div
+        className="relative mx-auto rounded-3xl overflow-hidden"
+        style={{
+          backgroundColor: '#2b2b2b',
+          height: '120vh',
+          maxHeight: '900px',
+          boxShadow: '0 0 0 8px rgba(255, 255, 255, 0.25)'
+        }}
+      >
+        {/* Top gradient fade */}
+        <div
+          className="absolute top-0 left-0 right-0 z-10 pointer-events-none"
+          style={{
+            height: '75%',
+            background: 'linear-gradient(180deg, #2b2b2b 0%, transparent 100%)'
+          }}
+        />
+
+        {/* Image Tickers Container */}
         <motion.div
           style={{ y: tickerY }}
-          className="flex gap-6 h-[700px] relative overflow-hidden"
+          className="absolute flex gap-6 sm:gap-9 md:gap-12 px-6 sm:px-12"
+          initial={{ top: '-400px' }}
         >
-          {/* Left Column - scrolls up infinitely */}
-          <div className="flex-1 relative overflow-hidden">
+          {/* Left Column - scrolls up */}
+          <div className="flex-1 overflow-hidden">
             <div className="animate-scroll-up flex flex-col gap-6">
               {[...leftImages, ...leftImages, ...leftImages, ...leftImages, ...leftImages].map((img, i) => (
                 <div
                   key={i}
-                  className="aspect-[4/3] rounded-2xl overflow-hidden flex-shrink-0"
+                  className="w-full sm:w-[280px] md:w-[400px] lg:w-[560px] rounded-2xl overflow-hidden flex-shrink-0"
+                  style={{ aspectRatio: '4/3' }}
                 >
                   <img
                     src={img}
@@ -447,13 +467,14 @@ function ImageShowcase() {
             </div>
           </div>
 
-          {/* Right Column - scrolls down infinitely */}
-          <div className="flex-1 relative overflow-hidden hidden sm:block">
+          {/* Right Column - scrolls down */}
+          <div className="flex-1 overflow-hidden hidden sm:block">
             <div className="animate-scroll-down flex flex-col gap-6">
               {[...rightImages, ...rightImages, ...rightImages, ...rightImages, ...rightImages].map((img, i) => (
                 <div
                   key={i}
-                  className="aspect-[4/3] rounded-2xl overflow-hidden flex-shrink-0"
+                  className="w-full sm:w-[280px] md:w-[400px] lg:w-[560px] rounded-2xl overflow-hidden flex-shrink-0"
+                  style={{ aspectRatio: '4/3' }}
                 >
                   <img
                     src={img}
@@ -466,30 +487,38 @@ function ImageShowcase() {
           </div>
         </motion.div>
 
-        {/* See Recent Work Button - Hover to reveal label */}
+        {/* See Recent Work Button */}
         <a
           href="#work"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-3 bg-white/75 backdrop-blur-sm rounded-full border border-white z-10 transition-all duration-300"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-3 px-5 py-3 rounded-full border border-white z-20 transition-all duration-300"
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.75)',
+            backdropFilter: 'blur(2px)'
+          }}
         >
           {/* Folder Icon */}
-          <svg className="w-6 h-6" viewBox="0 0 256 256" fill="currentColor">
+          <svg className="w-6 h-6" viewBox="0 0 256 256" fill="black">
             <path d="M216,72H131.31L104,44.69A15.88,15.88,0,0,0,92.69,40H40A16,16,0,0,0,24,56V200.62A15.41,15.41,0,0,0,39.39,216h177.5A15.13,15.13,0,0,0,232,200.89V88A16,16,0,0,0,216,72ZM40,56H92.69l16,16H40Z" />
           </svg>
 
-          {/* Label with rotation - appears on hover */}
+          {/* Label pill - appears on hover */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -18 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{
               opacity: isHovered ? 1 : 0,
               scale: isHovered ? 1 : 0.8,
               rotate: isHovered ? 19 : -18
             }}
-            transition={{ duration: 0.3 }}
-            className="px-4 py-1.5 bg-black text-white rounded-full text-sm font-semibold whitespace-nowrap origin-left"
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="absolute left-full ml-2 px-4 py-2 bg-black text-white rounded-full text-sm font-semibold whitespace-nowrap"
+            style={{ transformOrigin: 'left center' }}
           >
-            See Recent Work
+            <div className="flex items-center gap-1">
+              <span className="w-2 h-2 bg-black rotate-45 absolute -left-1" />
+              See Recent Work
+            </div>
           </motion.div>
         </a>
       </div>
