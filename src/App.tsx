@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ArrowRight, Plus, Minus, Star } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { Menu, X, ArrowRight, Plus, Minus, Star, Sparkles, Layout, FileCode, Zap, Search, Grid3X3 } from 'lucide-react'
 
 // Animation variants
 const fadeInUp = {
@@ -14,6 +14,45 @@ const staggerContainer = {
     opacity: 1,
     transition: { staggerChildren: 0.1 }
   }
+}
+
+// Service Badge Component
+function ServiceBadge({
+  label,
+  icon: Icon,
+  bgColor,
+  iconColor,
+  rotation = 0,
+  delay = 0
+}: {
+  label: string
+  icon: React.ElementType
+  bgColor: string
+  iconColor: string
+  rotation?: number
+  delay?: number
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
+      whileInView={{ opacity: 1, scale: 1, rotate: rotation }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay }}
+      whileHover={{ scale: 1.05, rotate: 0 }}
+      className="inline-flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-white"
+      style={{
+        boxShadow: '0px 0px 0px 8px rgba(255, 255, 255, 0.25), 12px 16px 16px 0px rgba(0, 0, 0, 0.1)'
+      }}
+    >
+      <div
+        className="w-10 h-10 rounded-full flex items-center justify-center"
+        style={{ backgroundColor: bgColor }}
+      >
+        <Icon className="w-5 h-5" style={{ color: iconColor }} />
+      </div>
+      <span className="font-medium text-[#1A1A1A] pr-2">{label}</span>
+    </motion.div>
+  )
 }
 
 // Header Component
@@ -37,7 +76,7 @@ function Header() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             onClick={() => setIsMenuOpen(true)}
-            className="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors"
+            className="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors shadow-lg"
           >
             <Menu className="w-5 h-5" />
           </motion.button>
@@ -98,49 +137,195 @@ function Header() {
   )
 }
 
-// Hero Section
+// Hero Section with Image Slideshow
 function Hero() {
+  const [currentImage, setCurrentImage] = useState(0)
+  const images = [
+    'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
+    'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=400&h=300&fit=crop',
+    'https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?w=400&h=300&fit=crop',
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [images.length])
+
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 pb-12">
-      <div className="max-w-5xl mx-auto text-center">
+    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 pb-12 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto text-center">
+        {/* Booking Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-black/10 rounded-full mb-8"
+        >
+          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          <span className="text-sm font-medium">Booking Open — 2 Spots Left</span>
+        </motion.div>
+
+        {/* Main Heading with Slideshow */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          className="relative"
         >
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight mb-8">
-            Unlimited Design
-            <br />
-            <span className="text-[#FF3700]">for Solid Startups</span>
+          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tight">
+            <span className="block">Unlimited</span>
+
+            {/* Slideshow embedded in text */}
+            <span className="inline-flex items-center gap-4 my-2">
+              <motion.div
+                animate={{ rotate: [-2, -2] }}
+                className="relative w-[140px] h-[100px] sm:w-[200px] sm:h-[150px] rounded-2xl overflow-hidden border-2 border-black shadow-xl"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentImage}
+                    src={images[currentImage]}
+                    alt="Design showcase"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full h-full object-cover"
+                  />
+                </AnimatePresence>
+              </motion.div>
+              <span className="text-black/40">Design</span>
+            </span>
+
+            <span className="block">
+              <span className="text-black/40">for </span>
+              {/* Logo Ticker inline */}
+              <motion.span
+                animate={{ rotate: [2, 2] }}
+                className="inline-block px-4 py-1 bg-white border-2 border-black rounded-full mx-2 text-3xl sm:text-5xl md:text-6xl"
+              >
+                <span className="text-[#FF3700]">Startups</span>
+              </motion.span>
+            </span>
+
+            <span className="block">
+              <span className="text-[#FF3700]">Solid </span>
+              <span>Startups</span>
+            </span>
           </h1>
+        </motion.div>
 
-          <p className="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto mb-10">
-            Design subscription that scales with your needs. Pause or cancel anytime.
-            Get unlimited requests and revisions.
-          </p>
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto mt-10 mb-10"
+        >
+          We help startups and brands create beautiful, functional products — fast and hassle-free.
+        </motion.p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.a
-              href="#pricing"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FF3700] text-white rounded-full font-semibold hover:bg-[#E63200] transition-colors"
-            >
-              See Plans
-              <ArrowRight className="w-5 h-5" />
-            </motion.a>
-            <motion.a
-              href="#work"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-text rounded-full font-semibold hover:bg-gray-100 transition-colors"
-            >
-              View Work
-            </motion.a>
-          </div>
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+        >
+          <motion.a
+            href="#pricing"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FF3700] text-white rounded-full font-semibold hover:bg-[#E63200] transition-colors shadow-lg"
+          >
+            See Plans
+            <ArrowRight className="w-5 h-5" />
+          </motion.a>
+          <motion.a
+            href="#work"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-text rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-lg border border-black/10"
+          >
+            View Work
+          </motion.a>
         </motion.div>
       </div>
     </section>
+  )
+}
+
+// Services Section with Floating Badges
+function Services() {
+  const services = [
+    { label: 'Strategy', icon: Sparkles, bgColor: '#FFD500', iconColor: '#660080', rotation: 4 },
+    { label: 'UI/UX', icon: Layout, bgColor: '#474747', iconColor: '#BAFFD0', rotation: 4 },
+    { label: 'Prototyping', icon: FileCode, bgColor: '#FF45AB', iconColor: '#C9FFFB', rotation: -4 },
+    { label: 'Animation', icon: Zap, bgColor: '#52FF69', iconColor: '#3224FF', rotation: -5 },
+    { label: 'Research', icon: Search, bgColor: '#05A9FF', iconColor: '#F8FFBF', rotation: -4 },
+    { label: 'Design Systems', icon: Grid3X3, bgColor: '#FF5E00', iconColor: '#FFF3C2', rotation: 3 },
+  ]
+
+  const ref = useRef<HTMLDivElement>(null)
+
+  return (
+    <section ref={ref} className="py-20 px-4 sm:px-6 relative overflow-hidden">
+      <div className="max-w-5xl mx-auto">
+        {/* Fading Text */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center mb-16 relative"
+        >
+          <FadingText />
+        </motion.div>
+
+        {/* Floating Service Badges */}
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+          {services.map((service, i) => (
+            <ServiceBadge
+              key={service.label}
+              {...service}
+              delay={i * 0.1}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Fading Text Component
+function FadingText() {
+  const ref = useRef<HTMLParagraphElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "center center"]
+  })
+
+  const words = "We help startups and enterprise to establish an emotional connection between their products and happy engaged customers".split(' ')
+
+  return (
+    <p ref={ref} className="text-2xl sm:text-3xl md:text-4xl font-normal leading-relaxed max-w-4xl mx-auto">
+      {words.map((word, i) => (
+        <FadingWord key={i} word={word} index={i} total={words.length} scrollYProgress={scrollYProgress} />
+      ))}
+    </p>
+  )
+}
+
+function FadingWord({ word, index, total, scrollYProgress }: { word: string; index: number; total: number; scrollYProgress: any }) {
+  const start = index / total
+  const end = (index + 1) / total
+  const opacity = useTransform(scrollYProgress, [start, end], [0.2, 1])
+
+  return (
+    <motion.span style={{ opacity }} className="inline-block mr-2">
+      {word}
+    </motion.span>
   )
 }
 
@@ -151,7 +336,7 @@ function LogoTicker() {
   ]
 
   return (
-    <section className="py-12 overflow-hidden border-y border-border">
+    <section className="py-12 overflow-hidden border-y border-black/10">
       <div className="flex animate-marquee">
         {[...logos, ...logos].map((logo, i) => (
           <div
@@ -188,7 +373,8 @@ function ImageShowcase() {
             <motion.div
               key={i}
               variants={fadeInUp}
-              className="aspect-[4/3] rounded-2xl overflow-hidden"
+              whileHover={{ y: -10, rotate: i === 1 ? 0 : (i === 0 ? -2 : 2) }}
+              className="aspect-[4/3] rounded-3xl overflow-hidden border-2 border-black shadow-xl"
             >
               <img
                 src={img}
@@ -216,7 +402,7 @@ function About() {
           className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
         >
           <motion.div variants={fadeInUp}>
-            <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium mb-6">
+            <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium mb-6 border border-black/10 shadow-sm">
               About Us
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
@@ -240,17 +426,26 @@ function About() {
           </motion.div>
 
           <motion.div variants={fadeInUp} className="relative">
-            <div className="aspect-square rounded-3xl overflow-hidden">
+            <motion.div
+              whileHover={{ rotate: 0 }}
+              animate={{ rotate: 3 }}
+              className="aspect-square rounded-3xl overflow-hidden border-2 border-black shadow-2xl"
+            >
               <img
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800"
                 alt="Team"
                 className="w-full h-full object-cover"
               />
-            </div>
+            </motion.div>
             <motion.div
-              animate={{ rotate: [0, 5, 0] }}
+              animate={{ rotate: [0, 5, 0], y: [0, -10, 0] }}
               transition={{ duration: 6, repeat: Infinity }}
-              className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#FF3700] rounded-2xl"
+              className="absolute -bottom-6 -right-6 w-28 h-28 bg-[#FF3700] rounded-2xl shadow-xl"
+            />
+            <motion.div
+              animate={{ rotate: [0, -5, 0], y: [0, 10, 0] }}
+              transition={{ duration: 5, repeat: Infinity }}
+              className="absolute -top-4 -left-4 w-20 h-20 bg-[#FFD500] rounded-xl shadow-lg"
             />
           </motion.div>
         </motion.div>
@@ -265,17 +460,20 @@ function Process() {
     {
       number: '01',
       title: 'Subscribe',
-      description: 'Pick a plan that fits your needs. No contracts, cancel anytime.'
+      description: 'Pick a plan that fits your needs. No contracts, cancel anytime.',
+      color: '#FFD500'
     },
     {
       number: '02',
       title: 'Request',
-      description: 'Submit unlimited design requests through our simple dashboard.'
+      description: 'Submit unlimited design requests through our simple dashboard.',
+      color: '#05A9FF'
     },
     {
       number: '03',
       title: 'Receive',
-      description: 'Get your designs delivered in 48 hours on average. Revise until perfect.'
+      description: 'Get your designs delivered in 48 hours on average. Revise until perfect.',
+      color: '#52FF69'
     }
   ]
 
@@ -289,7 +487,7 @@ function Process() {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-surface-dark rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-[#E8E8E8] rounded-full text-sm font-medium mb-6">
             How It Works
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
@@ -304,18 +502,19 @@ function Process() {
           variants={staggerContainer}
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          {steps.map((step) => (
+          {steps.map((step, i) => (
             <motion.div
               key={step.number}
               variants={fadeInUp}
-              whileHover={{ y: -5 }}
-              className="p-8 rounded-3xl bg-surface-dark"
+              whileHover={{ y: -10, rotate: i === 1 ? 0 : (i === 0 ? -2 : 2) }}
+              className="p-8 rounded-3xl border-2 border-black shadow-xl"
+              style={{ backgroundColor: step.color }}
             >
-              <span className="text-5xl font-bold text-[#FF3700]/30 mb-4 block">
+              <span className="text-6xl font-bold text-black/20 mb-4 block">
                 {step.number}
               </span>
               <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
-              <p className="text-text-muted">{step.description}</p>
+              <p className="text-black/70">{step.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -360,7 +559,7 @@ function Work() {
           className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
         >
           <div>
-            <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium mb-6">
+            <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium mb-6 border border-black/10 shadow-sm">
               Our Work
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
@@ -386,10 +585,10 @@ function Work() {
             <motion.article
               key={project.title}
               variants={fadeInUp}
-              whileHover={{ y: -5 }}
+              whileHover={{ y: -10 }}
               className="group cursor-pointer"
             >
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden mb-4 border-2 border-black shadow-xl">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -456,11 +655,12 @@ function Testimonials() {
           variants={staggerContainer}
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          {testimonials.map((t) => (
+          {testimonials.map((t, i) => (
             <motion.div
               key={t.author}
               variants={fadeInUp}
-              className="p-8 rounded-3xl bg-white/5 backdrop-blur-sm"
+              whileHover={{ y: -10, rotate: i === 1 ? 0 : (i === 0 ? -1 : 1) }}
+              className="p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10"
             >
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
@@ -472,7 +672,7 @@ function Testimonials() {
                 <img
                   src={t.avatar}
                   alt={t.author}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-12 h-12 rounded-full object-cover border-2 border-white/20"
                 />
                 <div>
                   <p className="font-semibold">{t.author}</p>
@@ -501,7 +701,8 @@ function Pricing() {
         'Unlimited revisions',
         'Pause or cancel anytime'
       ],
-      featured: false
+      featured: false,
+      color: '#FFD500'
     },
     {
       name: 'Pro',
@@ -515,7 +716,8 @@ function Pricing() {
         'Priority support',
         'Pause or cancel anytime'
       ],
-      featured: true
+      featured: true,
+      color: '#FF3700'
     },
     {
       name: 'Enterprise',
@@ -529,7 +731,8 @@ function Pricing() {
         '24/7 support',
         'Custom integrations'
       ],
-      featured: false
+      featured: false,
+      color: '#52FF69'
     }
   ]
 
@@ -543,7 +746,7 @@ function Pricing() {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium mb-6 border border-black/10 shadow-sm">
             Pricing
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
@@ -561,14 +764,14 @@ function Pricing() {
           variants={staggerContainer}
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          {plans.map((plan) => (
+          {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
               variants={fadeInUp}
-              whileHover={{ y: -5 }}
-              className={`p-8 rounded-3xl ${
+              whileHover={{ y: -10, rotate: i === 1 ? 0 : (i === 0 ? -1 : 1) }}
+              className={`p-8 rounded-3xl border-2 border-black shadow-xl ${
                 plan.featured
-                  ? 'bg-[#1A1A1A] text-white ring-2 ring-[#FF3700]'
+                  ? 'bg-[#1A1A1A] text-white'
                   : 'bg-white'
               }`}
             >
@@ -591,7 +794,8 @@ function Pricing() {
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
                     <svg
-                      className={`w-5 h-5 ${plan.featured ? 'text-[#FF3700]' : 'text-green-500'}`}
+                      className="w-5 h-5"
+                      style={{ color: plan.color }}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -612,7 +816,7 @@ function Pricing() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`w-full py-4 rounded-full font-semibold transition-colors ${
+                className={`w-full py-4 rounded-full font-semibold transition-colors border-2 border-black ${
                   plan.featured
                     ? 'bg-[#FF3700] text-white hover:bg-[#E63200]'
                     : 'bg-[#1A1A1A] text-white hover:bg-black'
@@ -638,12 +842,12 @@ function FAQ() {
       answer: 'Simply choose a plan and submit as many design requests as you need. We work on them one at a time (or two for Pro) and deliver within 48 hours on average.'
     },
     {
-      question: 'What if I don\'t like the design?',
-      answer: 'No worries! We offer unlimited revisions. We\'ll keep iterating until you\'re 100% satisfied with the result.'
+      question: "What if I don't like the design?",
+      answer: "No worries! We offer unlimited revisions. We'll keep iterating until you're 100% satisfied with the result."
     },
     {
       question: 'Can I really pause or cancel anytime?',
-      answer: 'Yes! There are no contracts or commitments. Pause when you don\'t need design work, and resume when you do.'
+      answer: "Yes! There are no contracts or commitments. Pause when you don't need design work, and resume when you do."
     },
     {
       question: 'What types of design do you cover?',
@@ -665,7 +869,7 @@ function FAQ() {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-surface-dark rounded-full text-sm font-medium mb-6">
+          <span className="inline-block px-4 py-2 bg-[#E8E8E8] rounded-full text-sm font-medium mb-6">
             FAQ
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
@@ -684,18 +888,20 @@ function FAQ() {
             <motion.div
               key={i}
               variants={fadeInUp}
-              className="rounded-2xl bg-surface-dark overflow-hidden"
+              className="rounded-2xl bg-[#E8E8E8] overflow-hidden border border-black/10"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full p-6 flex items-center justify-between text-left"
               >
                 <span className="font-semibold text-lg">{faq.question}</span>
-                {openIndex === i ? (
-                  <Minus className="w-5 h-5 flex-shrink-0" />
-                ) : (
-                  <Plus className="w-5 h-5 flex-shrink-0" />
-                )}
+                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+                  {openIndex === i ? (
+                    <Minus className="w-4 h-4" />
+                  ) : (
+                    <Plus className="w-4 h-4" />
+                  )}
+                </div>
               </button>
               <AnimatePresence>
                 {openIndex === i && (
@@ -727,10 +933,10 @@ function CTA() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative p-12 sm:p-16 rounded-3xl bg-[#1A1A1A] text-white text-center overflow-hidden"
+          className="relative p-12 sm:p-16 rounded-3xl bg-[#1A1A1A] text-white text-center overflow-hidden border-2 border-black shadow-2xl"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF3700] rounded-full blur-[100px] opacity-30" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#FF3700] rounded-full blur-[80px] opacity-20" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#FFD500] rounded-full blur-[80px] opacity-20" />
 
           <div className="relative">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
@@ -745,7 +951,7 @@ function CTA() {
               href="#pricing"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF3700] text-white rounded-full font-semibold hover:bg-[#E63200] transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF3700] text-white rounded-full font-semibold hover:bg-[#E63200] transition-colors shadow-lg"
             >
               Get Started
               <ArrowRight className="w-5 h-5" />
@@ -760,7 +966,7 @@ function CTA() {
 // Footer
 function Footer() {
   return (
-    <footer className="py-12 px-4 sm:px-6 border-t border-border">
+    <footer className="py-12 px-4 sm:px-6 border-t border-black/10">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
@@ -776,12 +982,12 @@ function Footer() {
           </div>
 
           <div className="flex gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors">
+            <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md border border-black/10">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
               </svg>
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors">
+            <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md border border-black/10">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
                 <circle cx="4" cy="4" r="2" />
@@ -790,7 +996,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-text-muted text-sm">
+        <div className="mt-12 pt-8 border-t border-black/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-text-muted text-sm">
           <p>&copy; 2024 Hanzo. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-text transition-colors">Privacy</a>
@@ -801,9 +1007,6 @@ function Footer() {
     </footer>
   )
 }
-
-// Marquee Animation CSS (add to index.css)
-// We'll add it inline for now
 
 // Main App
 function App() {
@@ -827,6 +1030,7 @@ function App() {
     <div className="min-h-screen">
       <Header />
       <Hero />
+      <Services />
       <LogoTicker />
       <ImageShowcase />
       <About />
