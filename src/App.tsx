@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
-import { Menu, X, ArrowRight, Plus, Minus, Star, Sparkles, Layout, FileCode, Zap, Search, Grid3X3 } from 'lucide-react'
+import { Menu, X, ArrowRight, Sparkles, Layout, FileCode, Zap, Search, Grid3X3 } from 'lucide-react'
 
 // Animation variants
 const fadeInUp = {
@@ -707,85 +707,6 @@ function Work() {
   )
 }
 
-// Testimonials Section
-function Testimonials() {
-  const testimonials = [
-    {
-      quote: "Hanzo transformed our brand completely. The subscription model is genius - we get unlimited revisions and the quality is always top-notch.",
-      author: "Sarah Chen",
-      role: "CEO, TechFlow",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100"
-    },
-    {
-      quote: "Best investment we've made. The turnaround time is incredible and the designs consistently exceed our expectations.",
-      author: "Marcus Rodriguez",
-      role: "Founder, Skyline",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100"
-    },
-    {
-      quote: "Finally, a design service that understands startups. Fast, flexible, and affordable. Highly recommended!",
-      author: "Emily Watson",
-      role: "CMO, GrowthLab",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100"
-    }
-  ]
-
-  return (
-    <section className="py-20 px-4 sm:px-6 bg-[#1A1A1A] text-white">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6">
-            Testimonials
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            What Our Clients Say
-          </h2>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-        >
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.author}
-              variants={fadeInUp}
-              whileHover={{ y: -10, rotate: i === 1 ? 0 : (i === 0 ? -1 : 1) }}
-              className="p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10"
-            >
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-[#FF3700] text-[#FF3700]" />
-                ))}
-              </div>
-              <p className="text-white/80 mb-6">{t.quote}</p>
-              <div className="flex items-center gap-4">
-                <img
-                  src={t.avatar}
-                  alt={t.author}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-white/20"
-                />
-                <div>
-                  <p className="font-semibold">{t.author}</p>
-                  <p className="text-white/60 text-sm">{t.role}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  )
-}
 
 // Pricing Section - Framer Style
 function Pricing() {
@@ -946,92 +867,167 @@ function Pricing() {
   )
 }
 
-// FAQ Section
+// FAQ Section - Framer Style with 2 columns
 function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const faqs = [
     {
-      question: 'How does the subscription work?',
-      answer: 'Simply choose a plan and submit as many design requests as you need. We work on them one at a time (or two for Pro) and deliver within 48 hours on average.'
+      question: "What's the difference between a subscription and a custom project?",
+      answer: 'The subscription is ongoing and flexible — ideal for continuous design needs. Custom projects are one-time, fixed-scope engagements for larger goals like a rebrand or product launch.'
     },
     {
-      question: "What if I don't like the design?",
-      answer: "No worries! We offer unlimited revisions. We'll keep iterating until you're 100% satisfied with the result."
+      question: 'How fast is the turnaround?',
+      answer: "Most requests are delivered within 1–2 business days. Larger tasks may take longer, but you'll always be kept in the loop."
     },
     {
-      question: 'Can I really pause or cancel anytime?',
-      answer: "Yes! There are no contracts or commitments. Pause when you don't need design work, and resume when you do."
+      question: 'How many requests can I make?',
+      answer: 'As many as you like — with a subscription, you can queue unlimited requests, and they\'ll be handled one at a time in priority order.'
     },
     {
-      question: 'What types of design do you cover?',
-      answer: 'We handle everything from web and mobile UI design, branding, social media graphics, presentations, and more.'
+      question: 'What types of design do you handle?',
+      answer: 'Websites, product UI, landing pages, brand assets, decks, social media visuals — anything digital that needs to look and feel sharp.'
     },
     {
-      question: 'Who are the designers?',
-      answer: 'Our team consists of senior designers with 5+ years of experience working with startups and Fortune 500 companies.'
+      question: 'What tools do you use?',
+      answer: 'Figma for design, Notion for task management, and Slack or email for async communication.'
+    },
+    {
+      question: 'Can I pause the subscription?',
+      answer: 'Yes — you can pause anytime and resume when you\'re ready. Unused days roll over.'
+    },
+    {
+      question: 'Do you offer development too?',
+      answer: 'Joris focuses on design only, but all deliverables are dev-ready. He can also recommend trusted no-code or Webflow/Framer developers if needed.'
     }
   ]
 
   return (
-    <section id="faq" className="py-20 px-4 sm:px-6 bg-white">
-      <div className="max-w-3xl mx-auto">
+    <section id="faq" className="py-20 px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={fadeInUp}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-2 bg-[#E8E8E8] rounded-full text-sm font-medium mb-6">
-            FAQ
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-sm mb-6 border border-black/10 shadow-sm">
+            <span className="w-1.5 h-1.5 bg-black/40 rounded-full" />
+            <em className="not-italic text-black/50 font-serif text-lg">FAQ</em>
+            <span className="w-1.5 h-1.5 bg-black/40 rounded-full" />
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            Got Questions?
+          <h2 className="text-[32px] font-medium tracking-[-0.04em]">
+            Your Questions, Answered
           </h2>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="space-y-4"
-        >
-          {faqs.map((faq, i) => (
-            <motion.div
-              key={i}
-              variants={fadeInUp}
-              className="rounded-2xl bg-[#E8E8E8] overflow-hidden border border-black/10"
+        {/* 2-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left - Contact Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ rotate: -2 }}
+            className="p-6 rounded-2xl h-fit"
+            data-card
+          >
+            <div
+              className="p-6 rounded-2xl"
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                boxShadow: '0px 0px 0px 8px rgba(255, 255, 255, 0.25), 12px 16px 16px 0px rgba(0, 0, 0, 0.1)'
+              }}
             >
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full p-6 flex items-center justify-between text-left"
+              {/* Photo */}
+              <div className="w-20 h-20 rounded-full overflow-hidden mb-4">
+                <img
+                  src="https://framerusercontent.com/images/zRVCa2eOgJIf1mJK5PYcBLrYI.png"
+                  alt="Joris van Dijk"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Title */}
+              <h3 className="text-xl font-semibold mb-6">
+                Have more questions? Book a free discovery call
+              </h3>
+
+              {/* CTA Button */}
+              <motion.a
+                href="#"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-black text-white rounded-full font-semibold w-full justify-center mb-4"
+                style={{
+                  boxShadow: '0px -16px 48px 0px rgb(0, 0, 0) inset, 24px 24px 74px -2.5px rgba(0, 0, 0, 0.18)'
+                }}
               >
-                <span className="font-semibold text-lg">{faq.question}</span>
-                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
-                  {openIndex === i ? (
-                    <Minus className="w-4 h-4" />
-                  ) : (
-                    <Plus className="w-4 h-4" />
+                Book a Discovery Call
+                <ArrowRight className="w-4 h-4 opacity-50" />
+              </motion.a>
+
+              {/* Email */}
+              <p className="text-sm text-center">
+                Or, email me at{' '}
+                <a href="mailto:joris@hanzo.com" className="underline hover:text-[#FF3700] transition-colors">
+                  joris@hanzo.com
+                </a>
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Right - FAQ Accordion */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="border-t border-black/25"
+          >
+            {faqs.map((faq, i) => (
+              <div
+                key={i}
+                className="border-b border-black/25"
+              >
+                <button
+                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                  className="w-full py-6 flex items-center justify-between text-left gap-4"
+                >
+                  <span className="font-semibold">{faq.question}</span>
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="w-5 h-5 transition-transform"
+                      viewBox="0 0 256 256"
+                      fill="#FF3700"
+                      style={{
+                        opacity: 0.75,
+                        transform: openIndex === i ? 'rotate(45deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.3s ease'
+                      }}
+                    >
+                      <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z" />
+                    </svg>
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {openIndex === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-6 text-black/60">{faq.answer}</p>
+                    </motion.div>
                   )}
-                </div>
-              </button>
-              <AnimatePresence>
-                {openIndex === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <p className="px-6 pb-6 text-text-muted">{faq.answer}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </motion.div>
+                </AnimatePresence>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   )
@@ -1175,7 +1171,6 @@ function App() {
       <About />
       <Process />
       <Work />
-      <Testimonials />
       <Pricing />
       <FAQ />
       <Footer />
