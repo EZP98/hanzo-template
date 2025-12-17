@@ -137,7 +137,7 @@ function Header() {
   )
 }
 
-// Hero Section with Image Slideshow - Framer Style
+// Hero Section - Exact Framer Replica
 function Hero() {
   const [currentImage, setCurrentImage] = useState(0)
   const images = [
@@ -146,30 +146,35 @@ function Hero() {
     'https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?w=400&h=300&fit=crop',
   ]
 
-  const logos = ['Stripe', 'Notion', 'Slack', 'Linear']
+  const avatars = [
+    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop',
+    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop',
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop',
+  ]
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length)
-    }, 3000)
+    }, 2500)
     return () => clearInterval(interval)
   }, [images.length])
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 pb-12 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20 pb-12 relative overflow-hidden">
+      <div className="max-w-[1200px] mx-auto text-center">
         {/* Booking Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-black/10 rounded-full mb-8 shadow-sm"
+          className="inline-flex items-center gap-3 px-5 py-2.5 bg-white border border-black/10 rounded-full mb-10"
         >
-          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-          <span className="text-sm font-medium">Booking Open — 2 Spots Left</span>
+          <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
+          <span className="text-base font-medium">Booking Open — 2 Spots Left</span>
         </motion.div>
 
-        {/* Main Heading - Framer Layout */}
+        {/* Main Heading - Exact Framer Layout */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -177,61 +182,75 @@ function Hero() {
           className="relative"
         >
           {/* Row 1: Unlimited [Slideshow] Design */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-2">
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-bold tracking-tight">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 leading-none">
+            <span className="text-[clamp(3rem,10vw,7rem)] font-bold tracking-[-0.02em]">
               Unlimited
-            </h1>
+            </span>
 
-            {/* Slideshow embedded */}
+            {/* Slideshow - Vertical scroll effect */}
             <motion.div
               style={{ rotate: -2 }}
-              className="relative w-[120px] h-[90px] sm:w-[180px] sm:h-[135px] md:w-[220px] md:h-[165px] rounded-2xl overflow-hidden border-2 border-black shadow-xl flex-shrink-0"
+              className="relative w-[100px] h-[75px] sm:w-[140px] sm:h-[105px] md:w-[160px] md:h-[120px] rounded-xl overflow-hidden border border-black/80 shadow-lg flex-shrink-0"
             >
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={currentImage}
-                  src={images[currentImage]}
-                  alt="Design showcase"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -30 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-full h-full object-cover"
-                />
-              </AnimatePresence>
+              <motion.div
+                animate={{ y: -currentImage * 100 + '%' }}
+                transition={{ duration: 0.6, ease: 'easeInOut' }}
+                className="absolute top-0 left-0 w-full"
+                style={{ height: `${images.length * 100}%` }}
+              >
+                {images.map((img, i) => (
+                  <img
+                    key={i}
+                    src={img}
+                    alt=""
+                    className="w-full object-cover"
+                    style={{ height: `${100 / images.length}%` }}
+                  />
+                ))}
+              </motion.div>
             </motion.div>
 
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-bold tracking-tight text-black/50">
+            <span className="text-[clamp(3rem,10vw,7rem)] font-bold tracking-[-0.02em] text-black/50">
               Design
-            </h1>
+            </span>
           </div>
 
           {/* Row 2: for [Logo Ticker] */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-2">
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-bold tracking-tight text-black/50">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 leading-none mt-1">
+            <span className="text-[clamp(3rem,10vw,7rem)] font-bold tracking-[-0.02em] text-black/50">
               for
-            </h1>
+            </span>
 
-            {/* Logo Ticker embedded */}
+            {/* Logo Ticker - Horizontal scroll */}
             <motion.div
               style={{ rotate: 2 }}
-              className="relative px-4 py-2 sm:px-6 sm:py-3 bg-white border-2 border-black rounded-full shadow-xl overflow-hidden flex-shrink-0"
+              className="relative px-4 py-2 sm:px-5 sm:py-2.5 bg-[#1a1a1a] border border-black rounded-full shadow-lg overflow-hidden flex-shrink-0"
             >
-              <div className="flex items-center gap-4 sm:gap-6">
-                {logos.map((logo) => (
-                  <span key={logo} className="text-lg sm:text-xl md:text-2xl font-medium text-black/70 whitespace-nowrap">
-                    {logo}
-                  </span>
-                ))}
+              <div className="flex items-center gap-4 sm:gap-5">
+                <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="white">
+                  <rect x="3" y="3" width="8" height="8" rx="1" />
+                  <rect x="13" y="3" width="8" height="8" rx="1" />
+                  <rect x="3" y="13" width="8" height="8" rx="1" />
+                  <rect x="13" y="13" width="8" height="8" rx="1" />
+                </svg>
+                <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="white">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="white">
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+                <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="white">
+                  <polygon points="12,2 22,22 2,22" />
+                </svg>
               </div>
             </motion.div>
           </div>
 
           {/* Row 3: Solid Startups */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-bold tracking-tight">
+          <div className="flex flex-wrap items-center justify-center leading-none mt-1">
+            <span className="text-[clamp(3rem,10vw,7rem)] font-bold tracking-[-0.02em]">
               Solid Startups
-            </h1>
+            </span>
           </div>
         </motion.div>
 
@@ -240,35 +259,44 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto mt-12 mb-10"
+          className="text-base sm:text-lg text-black/60 max-w-lg mx-auto mt-10 mb-8 leading-relaxed"
         >
-          We help startups and brands create beautiful, functional products — fast and hassle-free.
+          We help startups and brands create beautiful,
+          <br />
+          functional products — fast and hassle-free.
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* CTA with Avatar Stack */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row items-center justify-center gap-6"
         >
           <motion.a
             href="#pricing"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FF3700] text-white rounded-full font-semibold hover:bg-[#E63200] transition-colors shadow-lg"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1a1a1a] text-white rounded-full font-semibold hover:bg-black transition-colors"
           >
-            See Plans
-            <ArrowRight className="w-5 h-5" />
+            Choose your plan
+            <ArrowRight className="w-4 h-4" />
           </motion.a>
-          <motion.a
-            href="#work"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-text rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-lg border border-black/10"
-          >
-            View Work
-          </motion.a>
+
+          {/* Avatar Stack + Trusted by Leaders */}
+          <div className="flex items-center gap-3">
+            <div className="flex -space-x-2">
+              {avatars.map((avatar, i) => (
+                <img
+                  key={i}
+                  src={avatar}
+                  alt=""
+                  className="w-9 h-9 rounded-full border-2 border-white object-cover"
+                />
+              ))}
+            </div>
+            <span className="text-sm text-black/50">Trusted by Leaders</span>
+          </div>
         </motion.div>
       </div>
     </section>
