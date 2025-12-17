@@ -141,14 +141,14 @@ function Header() {
 function Hero() {
   const [currentImage, setCurrentImage] = useState(0)
   const images = [
-    'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?w=400&h=300&fit=crop',
+    'https://framerusercontent.com/images/670uUrkwoRnzhCl9b3kEMwUmgE4.jpg',
+    'https://framerusercontent.com/images/J4Ox47KYv4g8Lb2C0PXNkjDaA.jpg',
+    'https://framerusercontent.com/images/wo0P2ApHuac8yCSOoIU4GYSCkOc.png',
   ]
 
   const avatars = [
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop',
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop',
+    'https://framerusercontent.com/images/etglVFVv5e7VnmUVyHsNK3oyIbI.png',
+    'https://framerusercontent.com/images/zRVCa2eOgJIf1mJK5PYcBLrYI.png',
     'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop',
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop',
   ]
@@ -161,20 +161,21 @@ function Hero() {
   }, [images.length])
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20 pb-12 relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center px-6 sm:px-12 lg:px-[120px] pt-[180px] pb-[180px] relative overflow-hidden">
       <div className="max-w-[1200px] mx-auto text-center">
         {/* Booking Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="inline-flex items-center gap-3 px-5 py-2.5 bg-white border border-black/10 rounded-full mb-10"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-white rounded-full mb-10"
+          style={{ boxShadow: '0 0 0 1px rgba(0,0,0,0.1)' }}
         >
-          <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
-          <span className="text-base font-medium">Booking Open — 2 Spots Left</span>
+          <span className="w-1.5 h-1.5 bg-[#0cb300] rounded-full" />
+          <span className="text-sm font-medium">Booking Open — 2 Spots Left</span>
         </motion.div>
 
-        {/* Main Heading - Exact Framer Layout */}
+        {/* Main Heading - 108px desktop, -0.06em letter-spacing */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -182,15 +183,18 @@ function Hero() {
           className="relative"
         >
           {/* Row 1: Unlimited [Slideshow] Design */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 leading-none">
-            <span className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.02em]">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 leading-none">
+            <span
+              className="text-[44px] sm:text-[80px] lg:text-[108px] font-normal"
+              style={{ letterSpacing: '-0.06em' }}
+            >
               Unlimited
             </span>
 
             {/* Slideshow - Vertical scroll effect */}
             <motion.div
               style={{ rotate: -2 }}
-              className="relative w-[80px] h-[60px] sm:w-[100px] sm:h-[75px] md:w-[120px] md:h-[90px] rounded-xl overflow-hidden border border-black/80 shadow-lg flex-shrink-0"
+              className="relative w-[80px] h-[60px] sm:w-[120px] sm:h-[90px] lg:w-[160px] lg:h-[120px] rounded-xl overflow-hidden border border-black/80 shadow-lg flex-shrink-0"
             >
               <motion.div
                 animate={{ y: -currentImage * 100 + '%' }}
@@ -210,36 +214,42 @@ function Hero() {
               </motion.div>
             </motion.div>
 
-            <span className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.02em] text-black/50">
+            <span
+              className="text-[44px] sm:text-[80px] lg:text-[108px] font-normal text-black/50"
+              style={{ letterSpacing: '-0.06em' }}
+            >
               Design
             </span>
           </div>
 
           {/* Row 2: for [Logo Ticker] */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 leading-none mt-1">
-            <span className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.02em] text-black/50">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 leading-none mt-2">
+            <span
+              className="text-[44px] sm:text-[80px] lg:text-[108px] font-normal text-black/50"
+              style={{ letterSpacing: '-0.06em' }}
+            >
               for
             </span>
 
             {/* Logo Ticker - Horizontal scroll */}
             <motion.div
               style={{ rotate: 2 }}
-              className="relative px-4 py-2 sm:px-5 sm:py-2.5 bg-[#1a1a1a] border border-black rounded-full shadow-lg overflow-hidden flex-shrink-0"
+              className="relative px-5 py-3 bg-[#1a1a1a] border border-black rounded-full shadow-lg overflow-hidden flex-shrink-0"
             >
-              <div className="flex items-center gap-4 sm:gap-5">
-                <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="white">
+              <div className="flex items-center gap-5">
+                <svg className="w-7 h-7 sm:w-9 sm:h-9" viewBox="0 0 24 24" fill="white">
                   <rect x="3" y="3" width="8" height="8" rx="1" />
                   <rect x="13" y="3" width="8" height="8" rx="1" />
                   <rect x="3" y="13" width="8" height="8" rx="1" />
                   <rect x="13" y="13" width="8" height="8" rx="1" />
                 </svg>
-                <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="white">
+                <svg className="w-7 h-7 sm:w-9 sm:h-9" viewBox="0 0 24 24" fill="white">
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                 </svg>
-                <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="white">
+                <svg className="w-7 h-7 sm:w-9 sm:h-9" viewBox="0 0 24 24" fill="white">
                   <circle cx="12" cy="12" r="10" />
                 </svg>
-                <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="white">
+                <svg className="w-7 h-7 sm:w-9 sm:h-9" viewBox="0 0 24 24" fill="white">
                   <polygon points="12,2 22,22 2,22" />
                 </svg>
               </div>
@@ -247,8 +257,11 @@ function Hero() {
           </div>
 
           {/* Row 3: Solid Startups */}
-          <div className="flex flex-wrap items-center justify-center leading-none mt-1">
-            <span className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.02em]">
+          <div className="flex flex-wrap items-center justify-center leading-none mt-2">
+            <span
+              className="text-[44px] sm:text-[80px] lg:text-[108px] font-normal"
+              style={{ letterSpacing: '-0.06em' }}
+            >
               Solid Startups
             </span>
           </div>
@@ -259,7 +272,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-base sm:text-lg text-black/60 max-w-lg mx-auto mt-10 mb-8 leading-relaxed"
+          className="text-base sm:text-lg text-black/50 max-w-lg mx-auto mt-12 mb-10 leading-relaxed"
         >
           We help startups and brands create beautiful,
           <br />
@@ -277,10 +290,13 @@ function Hero() {
             href="#pricing"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1a1a1a] text-white rounded-full font-semibold hover:bg-black transition-colors"
+            className="inline-flex items-center gap-2 px-7 py-4 bg-black text-white rounded-full font-semibold"
+            style={{
+              boxShadow: '0px -16px 48px 0px rgb(0, 0, 0) inset, 24px 24px 74px -2.5px rgba(0, 0, 0, 0.18)'
+            }}
           >
             Choose your plan
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 opacity-50" />
           </motion.a>
 
           {/* Avatar Stack + Trusted by Leaders */}
@@ -291,7 +307,7 @@ function Hero() {
                   key={i}
                   src={avatar}
                   alt=""
-                  className="w-9 h-9 rounded-full border-2 border-white object-cover"
+                  className="w-10 h-10 rounded-full border-2 border-white object-cover"
                 />
               ))}
             </div>
@@ -1129,66 +1145,103 @@ function FAQ() {
 function Footer() {
   return (
     <footer className="sticky bottom-0 left-0 right-0 -z-10">
-      {/* Main Footer Container with border */}
-      <div className="mx-4 sm:mx-6 mb-4 rounded-2xl overflow-hidden border-8 border-[#D9D9D9]">
-        {/* Black Background with effects */}
-        <div className="relative bg-black text-white py-20 px-6 sm:px-12 overflow-hidden">
-          {/* Radial gradient background */}
+      {/* Main Footer Container with 8px border */}
+      <div
+        className="mx-4 sm:mx-6 mb-4 rounded-3xl overflow-hidden relative"
+        style={{
+          border: '8px solid rgb(217, 217, 217)',
+          backgroundColor: 'rgb(0, 0, 0)'
+        }}
+      >
+        {/* Radial gradient background with mask */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(100% 100% at 0% 0%, rgb(46, 46, 46) 0%, rgb(0, 0, 0) 100%)',
+            WebkitMask: 'radial-gradient(125% 100% at 0% 0%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.224) 88.29%, rgba(0, 0, 0, 0) 100%)',
+            mask: 'radial-gradient(125% 100% at 0% 0%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.224) 88.29%, rgba(0, 0, 0, 0) 100%)'
+          }}
+        >
+          {/* Diagonal stripes with complex masks */}
           <div
-            className="absolute inset-0 opacity-100"
+            className="absolute inset-0"
             style={{
-              background: 'radial-gradient(100% 100% at 0% 0%, rgb(46, 46, 46) 0%, rgb(0, 0, 0) 100%)',
-              mask: 'radial-gradient(125% 100% at 0% 0%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.224) 88%, rgba(0, 0, 0, 0) 100%)'
+              background: 'linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 83.93%, rgba(255, 255, 255, 0) 100%)',
+              WebkitMask: 'linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 20%, rgba(0, 0, 0, 0) 36%, rgb(0, 0, 0) 55%, rgba(0, 0, 0, 0.13) 67%, rgb(0, 0, 0) 78%, rgba(0, 0, 0, 0) 97%)',
+              opacity: 0.05,
+              transform: 'skewX(45deg)'
             }}
           />
-
-          {/* Diagonal light stripes */}
-          <div className="absolute inset-0 overflow-hidden opacity-5">
-            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent" style={{ transform: 'skewX(45deg)', left: '10%', width: '2px' }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent" style={{ transform: 'skewX(45deg)', left: '30%', width: '1px' }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent" style={{ transform: 'skewX(45deg)', left: '50%', width: '2px' }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent" style={{ transform: 'skewX(45deg)', left: '70%', width: '1px' }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent" style={{ transform: 'skewX(45deg)', left: '85%', width: '2px' }} />
-          </div>
-
-          {/* Noise texture */}
           <div
-            className="absolute inset-0 opacity-10"
+            className="absolute inset-0"
             style={{
-              backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
-              backgroundSize: '150px'
+              background: 'linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 83.93%, rgba(255, 255, 255, 0) 100%)',
+              WebkitMask: 'linear-gradient(90deg, rgba(0, 0, 0, 0) 11%, rgb(0, 0, 0) 26%, rgba(0, 0, 0, 0.55) 42%, rgba(0, 0, 0, 0.13) 67%, rgb(0, 0, 0) 78%, rgba(0, 0, 0, 0) 97%)',
+              opacity: 0.05,
+              transform: 'skewX(45deg)'
             }}
           />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 67%, rgba(255, 255, 255, 0) 100%)',
+              WebkitMask: 'linear-gradient(90deg, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 20%, rgba(0, 0, 0, 0.55) 29%, rgba(0, 0, 0, 0.42) 40%, rgb(0, 0, 0) 49%, rgba(0, 0, 0, 0.27) 55%, rgba(0, 0, 0, 0.13) 79%, rgb(0, 0, 0) 89%, rgba(0, 0, 0, 0) 97%)',
+              opacity: 0.05,
+              transform: 'skewX(45deg)'
+            }}
+          />
+        </div>
 
-          {/* Content */}
-          <div className="relative z-10 max-w-4xl mx-auto text-center">
-            {/* Badge */}
+        {/* Noise texture */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: 'url(https://framerusercontent.com/images/6mcf62RlDfRfU61Yg5vb2pefpi4.png)',
+            backgroundRepeat: 'repeat',
+            backgroundSize: '150px auto',
+            opacity: 0.1
+          }}
+        />
+
+        {/* Content */}
+        <div className="relative z-10 text-white py-20 px-6 sm:px-12">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Badge with gradient lines */}
             <div className="flex items-center justify-center gap-4 mb-8">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent to-white/50 max-w-[100px]" />
+              <div
+                className="flex-1 h-px max-w-[100px]"
+                style={{ background: 'linear-gradient(90deg, rgba(84, 84, 84, 0) 0%, rgb(255, 255, 255) 100%)', opacity: 0.5 }}
+              />
               <em className="text-white/50 font-serif text-lg not-italic">2 spots available</em>
-              <div className="flex-1 h-px bg-gradient-to-l from-transparent to-white/50 max-w-[100px]" />
+              <div
+                className="flex-1 h-px max-w-[100px]"
+                style={{ background: 'linear-gradient(270deg, rgba(84, 84, 84, 0) 0%, rgb(255, 255, 255) 100%)', opacity: 0.5 }}
+              />
             </div>
 
             {/* Heading */}
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal mb-6" style={{ letterSpacing: '-0.06em' }}>
               <span className="text-white">Let's </span>
               <span className="text-white/50">Connect</span>
-            </h2>
+            </h1>
 
             {/* Description */}
             <p className="text-white text-lg mb-10 max-w-lg mx-auto">
               Feel free to contact me if having any questions. I'm available for new projects or just for chatting.
             </p>
 
-            {/* CTA Button */}
-            <div className="inline-flex items-center gap-2 p-1.5 rounded-full bg-white/30">
+            {/* CTA Button Container */}
+            <div
+              className="inline-flex items-center p-1.5 rounded-full"
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}
+            >
               <motion.a
                 href="#"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full font-semibold"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-black text-white rounded-full font-semibold"
                 style={{
-                  boxShadow: '0px -16px 48px 0px rgb(0, 0, 0) inset, 24px 24px 74px -2.5px rgba(0, 0, 0, 0.18)'
+                  boxShadow: 'rgba(0, 0, 0, 0.18) 0.57px 0.57px 1.76px -0.42px, rgba(0, 0, 0, 0.18) 1.45px 1.45px 4.5px -0.83px, rgba(0, 0, 0, 0.18) 2.9px 2.9px 9px -1.25px, rgba(0, 0, 0, 0.18) 5.49px 5.49px 17.09px -1.67px, rgba(0, 0, 0, 0.18) 10.92px 10.92px 33.97px -2.08px, rgba(0, 0, 0, 0.18) 24px 24px 74.67px -2.5px, rgb(0, 0, 0) 0px -16px 48px 0px inset'
                 }}
               >
                 Book a free intro call
@@ -1198,29 +1251,29 @@ function Footer() {
           </div>
 
           {/* Bottom Content */}
-          <div className="relative z-10 mt-20 pt-8 border-t border-white/50">
+          <div className="mt-20 pt-8" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.5)' }}>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
               {/* Copyright */}
               <p className="text-white text-sm">© Hanzo Studio, 2025</p>
 
               {/* Social Links */}
               <div className="flex items-center gap-3">
-                <a href="#" className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-colors">
+                <a href="#" className="w-10 h-10 rounded-full flex items-center justify-center text-white/50 hover:text-white transition-colors" style={{ border: '1px solid rgba(255, 255, 255, 0.5)' }}>
                   <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
                     <path d="M128,24a104,104,0,0,0,0,208c21.51,0,44.1-6.48,60.43-17.33a8,8,0,0,0-8.86-13.33C166,210.38,146.21,216,128,216a88,88,0,1,1,88-88c0,26.45-10.88,32-20,32s-20-5.55-20-32V88a8,8,0,0,0-16,0v4.26a48,48,0,1,0,5.93,65.1c6,12,16.35,18.64,30.07,18.64,22.54,0,36-17.94,36-48A104.11,104.11,0,0,0,128,24Zm0,136a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z" />
                   </svg>
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-colors">
+                <a href="#" className="w-10 h-10 rounded-full flex items-center justify-center text-white/50 hover:text-white transition-colors" style={{ border: '1px solid rgba(255, 255, 255, 0.5)' }}>
                   <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
                     <path d="M214.75,211.71l-62.6-98.38,61.77-67.95a8,8,0,0,0-11.84-10.76L143.24,99.34,102.75,35.71A8,8,0,0,0,96,32H48a8,8,0,0,0-6.75,12.3l62.6,98.37-61.77,68a8,8,0,1,0,11.84,10.76l58.84-64.72,40.49,63.63A8,8,0,0,0,160,224h48a8,8,0,0,0,6.75-12.29ZM164.39,208,62.57,48h29L193.43,208Z" />
                   </svg>
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-colors">
+                <a href="#" className="w-10 h-10 rounded-full flex items-center justify-center text-white/50 hover:text-white transition-colors" style={{ border: '1px solid rgba(255, 255, 255, 0.5)' }}>
                   <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
                     <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z" />
                   </svg>
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-colors">
+                <a href="#" className="w-10 h-10 rounded-full flex items-center justify-center text-white/50 hover:text-white transition-colors" style={{ border: '1px solid rgba(255, 255, 255, 0.5)' }}>
                   <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
                     <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z" />
                   </svg>
