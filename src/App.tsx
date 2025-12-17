@@ -182,15 +182,15 @@ function Hero() {
           className="relative"
         >
           {/* Row 1: Unlimited [Slideshow] Design */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 leading-none">
-            <span className="text-[clamp(3rem,10vw,7rem)] font-bold tracking-[-0.02em]">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 leading-none">
+            <span className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.02em]">
               Unlimited
             </span>
 
             {/* Slideshow - Vertical scroll effect */}
             <motion.div
               style={{ rotate: -2 }}
-              className="relative w-[100px] h-[75px] sm:w-[140px] sm:h-[105px] md:w-[160px] md:h-[120px] rounded-xl overflow-hidden border border-black/80 shadow-lg flex-shrink-0"
+              className="relative w-[80px] h-[60px] sm:w-[100px] sm:h-[75px] md:w-[120px] md:h-[90px] rounded-xl overflow-hidden border border-black/80 shadow-lg flex-shrink-0"
             >
               <motion.div
                 animate={{ y: -currentImage * 100 + '%' }}
@@ -210,14 +210,14 @@ function Hero() {
               </motion.div>
             </motion.div>
 
-            <span className="text-[clamp(3rem,10vw,7rem)] font-bold tracking-[-0.02em] text-black/50">
+            <span className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.02em] text-black/50">
               Design
             </span>
           </div>
 
           {/* Row 2: for [Logo Ticker] */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 leading-none mt-1">
-            <span className="text-[clamp(3rem,10vw,7rem)] font-bold tracking-[-0.02em] text-black/50">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 leading-none mt-1">
+            <span className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.02em] text-black/50">
               for
             </span>
 
@@ -248,7 +248,7 @@ function Hero() {
 
           {/* Row 3: Solid Startups */}
           <div className="flex flex-wrap items-center justify-center leading-none mt-1">
-            <span className="text-[clamp(3rem,10vw,7rem)] font-bold tracking-[-0.02em]">
+            <span className="text-[48px] sm:text-[64px] md:text-[80px] font-bold tracking-[-0.02em]">
               Solid Startups
             </span>
           </div>
