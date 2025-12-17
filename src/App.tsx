@@ -139,11 +139,9 @@ function Header() {
 
 // Hero Section - Exact Framer Replica
 function Hero() {
-  const [currentImage, setCurrentImage] = useState(0)
-  const images = [
-    'https://framerusercontent.com/images/670uUrkwoRnzhCl9b3kEMwUmgE4.jpg',
-    'https://framerusercontent.com/images/J4Ox47KYv4g8Lb2C0PXNkjDaA.jpg',
-    'https://framerusercontent.com/images/wo0P2ApHuac8yCSOoIU4GYSCkOc.png',
+  const slideshowImages = [
+    'https://framerusercontent.com/images/0Y1cjcOdQp68PBw6G3HHfHz6TYo.jpg',
+    'https://framerusercontent.com/images/jSslhcqo8HKNjUvPEceq7bhbY.jpg',
   ]
 
   const avatars = [
@@ -152,13 +150,6 @@ function Hero() {
     'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop',
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop',
   ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length)
-    }, 2500)
-    return () => clearInterval(interval)
-  }, [images.length])
 
   return (
     <section className="min-h-screen flex items-center justify-center px-6 sm:px-12 lg:px-[120px] pt-[180px] pb-[180px] relative overflow-hidden">
@@ -183,35 +174,37 @@ function Hero() {
           className="relative"
         >
           {/* Row 1: Unlimited [Slideshow] Design */}
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 leading-none">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 leading-none">
             <span
-              className="text-[44px] sm:text-[80px] lg:text-[108px] font-normal"
+              className="text-[44px] sm:text-[80px] lg:text-[108px] font-bold"
               style={{ letterSpacing: '-0.06em' }}
             >
               Unlimited
             </span>
 
-            {/* Slideshow - Vertical scroll effect */}
+            {/* Slideshow - Vertical scroll effect with border */}
             <motion.div
               style={{ rotate: -2 }}
-              className="relative w-[80px] h-[60px] sm:w-[120px] sm:h-[90px] lg:w-[160px] lg:h-[120px] rounded-xl overflow-hidden border border-black/80 shadow-lg flex-shrink-0"
+              className="relative w-[90px] h-[68px] sm:w-[140px] sm:h-[105px] lg:w-[190px] lg:h-[140px] rounded-xl overflow-hidden flex-shrink-0"
+              data-border="true"
             >
-              <motion.div
-                animate={{ y: -currentImage * 100 + '%' }}
-                transition={{ duration: 0.6, ease: 'easeInOut' }}
-                className="absolute top-0 left-0 w-full"
-                style={{ height: `${images.length * 100}%` }}
-              >
-                {images.map((img, i) => (
+              {/* Border overlay */}
+              <div
+                className="absolute inset-0 rounded-xl pointer-events-none z-10"
+                style={{ border: '3px solid rgba(0, 0, 0, 0.8)' }}
+              />
+              {/* Infinite vertical scroll */}
+              <div className="animate-hero-slideshow h-full">
+                {/* Triple the images for seamless loop */}
+                {[...slideshowImages, ...slideshowImages, ...slideshowImages].map((img, i) => (
                   <img
                     key={i}
                     src={img}
                     alt=""
-                    className="w-full object-cover"
-                    style={{ height: `${100 / images.length}%` }}
+                    className="w-full h-full object-cover"
                   />
                 ))}
-              </motion.div>
+              </div>
             </motion.div>
 
             <span
@@ -222,8 +215,8 @@ function Hero() {
             </span>
           </div>
 
-          {/* Row 2: for [Logo Ticker] */}
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 leading-none mt-2">
+          {/* Row 2: for [Logo Ticker] Solid Startups */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 leading-none mt-1 sm:mt-0">
             <span
               className="text-[44px] sm:text-[80px] lg:text-[108px] font-normal text-black/50"
               style={{ letterSpacing: '-0.06em' }}
@@ -231,35 +224,49 @@ function Hero() {
               for
             </span>
 
-            {/* Logo Ticker - Horizontal scroll */}
+            {/* Logo Ticker - Horizontal scroll with border */}
             <motion.div
               style={{ rotate: 2 }}
-              className="relative px-5 py-3 bg-[#1a1a1a] border border-black rounded-full shadow-lg overflow-hidden flex-shrink-0"
+              className="relative h-[50px] sm:h-[70px] lg:h-[85px] w-[180px] sm:w-[280px] lg:w-[360px] rounded-full overflow-hidden flex-shrink-0"
+              data-border="true"
             >
-              <div className="flex items-center gap-5">
-                <svg className="w-7 h-7 sm:w-9 sm:h-9" viewBox="0 0 24 24" fill="white">
-                  <rect x="3" y="3" width="8" height="8" rx="1" />
-                  <rect x="13" y="3" width="8" height="8" rx="1" />
-                  <rect x="3" y="13" width="8" height="8" rx="1" />
-                  <rect x="13" y="13" width="8" height="8" rx="1" />
-                </svg>
-                <svg className="w-7 h-7 sm:w-9 sm:h-9" viewBox="0 0 24 24" fill="white">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
-                <svg className="w-7 h-7 sm:w-9 sm:h-9" viewBox="0 0 24 24" fill="white">
-                  <circle cx="12" cy="12" r="10" />
-                </svg>
-                <svg className="w-7 h-7 sm:w-9 sm:h-9" viewBox="0 0 24 24" fill="white">
-                  <polygon points="12,2 22,22 2,22" />
-                </svg>
+              {/* Border overlay */}
+              <div
+                className="absolute inset-0 rounded-full pointer-events-none z-10"
+                style={{ border: '3px solid rgba(0, 0, 0, 0.8)' }}
+              />
+              {/* Background */}
+              <div className="absolute inset-0 bg-black" />
+              {/* Infinite horizontal scroll */}
+              <div className="absolute inset-0 flex items-center overflow-hidden">
+                <div className="animate-hero-ticker flex items-center gap-6 sm:gap-9">
+                  {/* Logo set - repeated 3x for seamless loop */}
+                  {[1, 2, 3].map((set) => (
+                    <div key={set} className="flex items-center gap-6 sm:gap-9 px-3">
+                      {/* Notion-style logo */}
+                      <svg className="w-14 h-6 sm:w-20 sm:h-8" viewBox="0 0 88 34" fill="white">
+                        <path d="M5.6 4.2c1.7 1.3 2.4 1.2 5.6 1L43 3.1c.7 0 .1-.7-.1-.8l-5.5-4C36.1-2.6 34.3-2.2 32.1-2l-32.9 2c-1.1.1-1.3.6-.9 1l7.3 3.2zm1.8 7.9v35c0 1.9 1 2.6 3.1 2.5l34.2-2c2.1-.1 2.4-1.4 2.4-2.8V10c0-1.4-.5-2.1-1.7-2l-35.8 2.1c-1.3.1-2.2.6-2.2 2zm33.8 1.5c.2.9 0 1.8-.9 1.9l-1.7.3v25.8c-1.4.8-2.8 1.2-3.9 1.2-1.8 0-2.3-.6-3.6-2.3l-11.2-17.6v17l3.4.8s0 1.8-2.5 1.8l-7 .4c-.2-.4 0-1.5.8-1.7l2-.5V18l-2.8-.2c-.2-.9.3-2.3 1.7-2.4l7.5-.5 11.6 17.8V16.6l-2.9-.3c-.2-1.1.6-1.9 1.6-2l7.5-.4z" />
+                      </svg>
+                      {/* Figma-style logo */}
+                      <svg className="w-10 h-8 sm:w-14 sm:h-12" viewBox="0 0 88 48" fill="white">
+                        <path d="M22 48c6.1 0 11-4.9 11-11v-11H22c-6.1 0-11 4.9-11 11s4.9 11 11 11zm0-48C15.9 0 11 4.9 11 11s4.9 11 11 11h11V11C33 4.9 28.1 0 22 0zm22 0H33v22h11c6.1 0 11-4.9 11-11S50.1 0 44 0zm0 26H33v11c0 6.1 4.9 11 11 11s11-4.9 11-11-4.9-11-11-11zm22-15c0-6.1-4.9-11-11-11H44v22h11c6.1 0 11-4.9 11-11z" />
+                      </svg>
+                      {/* Slack-style logo */}
+                      <svg className="w-12 h-8 sm:w-16 sm:h-10" viewBox="0 0 100 40" fill="white">
+                        <path d="M21 25.8c0 2.3-1.8 4.2-4.2 4.2-2.3 0-4.2-1.8-4.2-4.2 0-2.3 1.8-4.2 4.2-4.2h4.2v4.2zm2.1 0c0-2.3 1.8-4.2 4.2-4.2 2.3 0 4.2 1.8 4.2 4.2v10.4c0 2.3-1.8 4.2-4.2 4.2-2.3 0-4.2-1.8-4.2-4.2V25.8zM27.3 10c-2.3 0-4.2-1.8-4.2-4.2 0-2.3 1.8-4.2 4.2-4.2 2.3 0 4.2 1.8 4.2 4.2v4.2h-4.2zm0 2.1c2.3 0 4.2 1.8 4.2 4.2 0 2.3-1.8 4.2-4.2 4.2H16.8c-2.3 0-4.2-1.8-4.2-4.2 0-2.3 1.8-4.2 4.2-4.2h10.5zM42 16.3c0-2.3 1.8-4.2 4.2-4.2 2.3 0 4.2 1.8 4.2 4.2 0 2.3-1.8 4.2-4.2 4.2H42v-4.2zm-2.1 0c0 2.3-1.8 4.2-4.2 4.2-2.3 0-4.2-1.8-4.2-4.2V5.8c0-2.3 1.8-4.2 4.2-4.2 2.3 0 4.2 1.8 4.2 4.2v10.5zM35.7 32c2.3 0 4.2 1.8 4.2 4.2 0 2.3-1.8 4.2-4.2 4.2-2.3 0-4.2-1.8-4.2-4.2V32h4.2zm0-2.1c-2.3 0-4.2-1.8-4.2-4.2 0-2.3 1.8-4.2 4.2-4.2h10.5c2.3 0 4.2 1.8 4.2 4.2 0 2.3-1.8 4.2-4.2 4.2H35.7z" />
+                      </svg>
+                      {/* Linear-style logo */}
+                      <svg className="w-16 h-6 sm:w-24 sm:h-8" viewBox="0 0 132 30" fill="white">
+                        <path d="M15 0C6.7 0 0 6.7 0 15s6.7 15 15 15 15-6.7 15-15S23.3 0 15 0zm7.1 22.1L7.9 7.9c3.4-3.4 8.9-3.4 12.3 0l1.9 1.9c3.4 3.4 3.4 8.9 0 12.3zM45 7h3v16h-3V7zm9 0h3v2.3c.9-1.7 2.7-2.7 4.8-2.7 3.5 0 5.7 2.4 5.7 6.2V23h-3v-9.6c0-2.5-1.4-4-3.7-4-2.5 0-4 1.7-4 4.5V23h-3V7zm21 0h3v2.2c1-1.6 2.7-2.6 5-2.6 4 0 6.8 3.2 6.8 8.2s-2.8 8.3-6.8 8.3c-2.2 0-4-1-5-2.5V30h-3V7zm7.3 13.3c2.6 0 4.4-2 4.4-5.1s-1.8-5.1-4.4-5.1c-2.6 0-4.4 2-4.4 5.1s1.8 5.1 4.4 5.1zM97 7h3v16h-3v-2.2c-1 1.6-2.7 2.6-5 2.6-4 0-6.8-3.3-6.8-8.3s2.8-8.2 6.8-8.2c2.3 0 4 1 5 2.6V7zm-4.3 13.3c2.6 0 4.4-2 4.4-5.1s-1.8-5.1-4.4-5.1c-2.6 0-4.4 2-4.4 5.1s1.8 5.1 4.4 5.1zM108 7h3v2c.7-1.4 2-2.3 4-2.3.8 0 1.5.1 2 .3v3c-.6-.2-1.3-.3-2-.3-2.3 0-4 1.6-4 4.5V23h-3V7z" />
+                      </svg>
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
-          </div>
 
-          {/* Row 3: Solid Startups */}
-          <div className="flex flex-wrap items-center justify-center leading-none mt-2">
             <span
-              className="text-[44px] sm:text-[80px] lg:text-[108px] font-normal"
+              className="text-[44px] sm:text-[80px] lg:text-[108px] font-bold"
               style={{ letterSpacing: '-0.06em' }}
             >
               Solid Startups
@@ -1313,6 +1320,20 @@ function App() {
       }
       .animate-scroll-down {
         animation: scroll-down 25s linear infinite;
+      }
+      @keyframes hero-slideshow {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-66.66%); }
+      }
+      .animate-hero-slideshow {
+        animation: hero-slideshow 4s ease-in-out infinite;
+      }
+      @keyframes hero-ticker {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-33.33%); }
+      }
+      .animate-hero-ticker {
+        animation: hero-ticker 8s linear infinite;
       }
     `
     document.head.appendChild(style)
