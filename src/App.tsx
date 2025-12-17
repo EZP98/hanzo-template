@@ -1037,84 +1037,109 @@ function FAQ() {
   )
 }
 
-// CTA Section
-function CTA() {
-  return (
-    <section className="py-20 px-4 sm:px-6">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative p-12 sm:p-16 rounded-3xl bg-[#1A1A1A] text-white text-center overflow-hidden border-2 border-black shadow-2xl"
-        >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF3700] rounded-full blur-[100px] opacity-30" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#FFD500] rounded-full blur-[80px] opacity-20" />
 
-          <div className="relative">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-              Ready to Transform
-              <br />
-              Your Brand?
-            </h2>
-            <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
-              Join 100+ startups already growing with Hanzo. Start your design journey today.
-            </p>
-            <motion.a
-              href="#pricing"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF3700] text-white rounded-full font-semibold hover:bg-[#E63200] transition-colors shadow-lg"
-            >
-              Get Started
-              <ArrowRight className="w-5 h-5" />
-            </motion.a>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-// Footer
+// Footer - Framer Style with special effects
 function Footer() {
   return (
-    <footer className="py-12 px-4 sm:px-6 border-t border-black/10">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div>
-            <span className="text-2xl font-bold">Hanzo</span>
-            <p className="text-text-muted mt-2">Design subscriptions for startups</p>
+    <footer className="relative">
+      {/* Main Footer Container with border */}
+      <div className="mx-4 sm:mx-6 mb-4 rounded-2xl overflow-hidden border-8 border-[#D9D9D9]">
+        {/* Black Background with effects */}
+        <div className="relative bg-black text-white py-20 px-6 sm:px-12 overflow-hidden">
+          {/* Radial gradient background */}
+          <div
+            className="absolute inset-0 opacity-100"
+            style={{
+              background: 'radial-gradient(100% 100% at 0% 0%, rgb(46, 46, 46) 0%, rgb(0, 0, 0) 100%)',
+              mask: 'radial-gradient(125% 100% at 0% 0%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.224) 88%, rgba(0, 0, 0, 0) 100%)'
+            }}
+          />
+
+          {/* Diagonal light stripes */}
+          <div className="absolute inset-0 overflow-hidden opacity-5">
+            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent" style={{ transform: 'skewX(45deg)', left: '10%', width: '2px' }} />
+            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent" style={{ transform: 'skewX(45deg)', left: '30%', width: '1px' }} />
+            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent" style={{ transform: 'skewX(45deg)', left: '50%', width: '2px' }} />
+            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent" style={{ transform: 'skewX(45deg)', left: '70%', width: '1px' }} />
+            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent" style={{ transform: 'skewX(45deg)', left: '85%', width: '2px' }} />
           </div>
 
-          <div className="flex gap-6">
-            <a href="#work" className="text-text-muted hover:text-text transition-colors">Work</a>
-            <a href="#about" className="text-text-muted hover:text-text transition-colors">About</a>
-            <a href="#pricing" className="text-text-muted hover:text-text transition-colors">Pricing</a>
-            <a href="#faq" className="text-text-muted hover:text-text transition-colors">FAQ</a>
+          {/* Noise texture */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
+              backgroundSize: '150px'
+            }}
+          />
+
+          {/* Content */}
+          <div className="relative z-10 max-w-4xl mx-auto text-center">
+            {/* Badge */}
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent to-white/50 max-w-[100px]" />
+              <em className="text-white/50 font-serif text-lg not-italic">2 spots available</em>
+              <div className="flex-1 h-px bg-gradient-to-l from-transparent to-white/50 max-w-[100px]" />
+            </div>
+
+            {/* Heading */}
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+              <span className="text-white">Let's </span>
+              <span className="text-white/50">Connect</span>
+            </h2>
+
+            {/* Description */}
+            <p className="text-white text-lg mb-10 max-w-lg mx-auto">
+              Feel free to contact me if having any questions. I'm available for new projects or just for chatting.
+            </p>
+
+            {/* CTA Button */}
+            <div className="inline-flex items-center gap-2 p-1.5 rounded-full bg-white/30">
+              <motion.a
+                href="#"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full font-semibold"
+                style={{
+                  boxShadow: '0px -16px 48px 0px rgb(0, 0, 0) inset, 24px 24px 74px -2.5px rgba(0, 0, 0, 0.18)'
+                }}
+              >
+                Book a free intro call
+                <ArrowRight className="w-4 h-4 opacity-50" />
+              </motion.a>
+            </div>
           </div>
 
-          <div className="flex gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md border border-black/10">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-              </svg>
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md border border-black/10">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
-                <circle cx="4" cy="4" r="2" />
-              </svg>
-            </a>
-          </div>
-        </div>
+          {/* Bottom Content */}
+          <div className="relative z-10 mt-20 pt-8 border-t border-white/50">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              {/* Copyright */}
+              <p className="text-white text-sm">© Hanzo Studio, 2025</p>
 
-        <div className="mt-12 pt-8 border-t border-black/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-text-muted text-sm">
-          <p>&copy; 2024 Hanzo. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-text transition-colors">Privacy</a>
-            <a href="#" className="hover:text-text transition-colors">Terms</a>
+              {/* Social Links */}
+              <div className="flex items-center gap-3">
+                <a href="#" className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-colors">
+                  <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
+                    <path d="M128,24a104,104,0,0,0,0,208c21.51,0,44.1-6.48,60.43-17.33a8,8,0,0,0-8.86-13.33C166,210.38,146.21,216,128,216a88,88,0,1,1,88-88c0,26.45-10.88,32-20,32s-20-5.55-20-32V88a8,8,0,0,0-16,0v4.26a48,48,0,1,0,5.93,65.1c6,12,16.35,18.64,30.07,18.64,22.54,0,36-17.94,36-48A104.11,104.11,0,0,0,128,24Zm0,136a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z" />
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-colors">
+                  <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
+                    <path d="M214.75,211.71l-62.6-98.38,61.77-67.95a8,8,0,0,0-11.84-10.76L143.24,99.34,102.75,35.71A8,8,0,0,0,96,32H48a8,8,0,0,0-6.75,12.3l62.6,98.37-61.77,68a8,8,0,1,0,11.84,10.76l58.84-64.72,40.49,63.63A8,8,0,0,0,160,224h48a8,8,0,0,0,6.75-12.29ZM164.39,208,62.57,48h29L193.43,208Z" />
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-colors">
+                  <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
+                    <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z" />
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-colors">
+                  <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
+                    <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1153,7 +1178,6 @@ function App() {
       <Testimonials />
       <Pricing />
       <FAQ />
-      <CTA />
       <Footer />
     </div>
   )
