@@ -69,7 +69,7 @@ function Header() {
             animate={{ opacity: 1, x: 0 }}
             className="text-2xl sm:text-3xl font-bold tracking-tight"
           >
-            Hanzo
+            Ezio P.
           </motion.a>
 
           <motion.button
@@ -94,7 +94,7 @@ function Header() {
           >
             <div className="h-full flex flex-col p-6">
               <div className="flex items-center justify-between mb-12">
-                <span className="text-2xl sm:text-3xl font-bold">Hanzo</span>
+                <span className="text-2xl sm:text-3xl font-bold">Ezio P.</span>
                 <button
                   onClick={() => setIsMenuOpen(false)}
                   className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
@@ -208,7 +208,7 @@ function Hero() {
             </motion.div>
 
             <span
-              className="text-[44px] sm:text-[80px] lg:text-[108px] font-normal text-black/50"
+              className="text-[36px] sm:text-[60px] lg:text-[80px] font-normal text-black/50"
               style={{ letterSpacing: '-0.06em' }}
             >
               Design
@@ -218,7 +218,7 @@ function Hero() {
           {/* Row 2: for [Logo Ticker] Solid Startups */}
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 leading-none mt-1 sm:mt-0">
             <span
-              className="text-[44px] sm:text-[80px] lg:text-[108px] font-normal text-black/50"
+              className="text-[36px] sm:text-[60px] lg:text-[80px] font-normal text-black/50"
               style={{ letterSpacing: '-0.06em' }}
             >
               for
@@ -552,10 +552,10 @@ function ImageShowcase() {
 // About Section - Framer Style
 function About() {
   const experiences = [
-    { role: 'Freelance Practice', company: 'Hanzo Co.', period: '2011  →  Now' },
-    { role: 'Design Lead', company: 'Google', period: '2024  →  Now' },
-    { role: 'Senior Designer', company: 'PayPal', period: '2019  →  2024' },
-    { role: 'Product Designer', company: 'Meta', period: '2016  →  2019' },
+    { role: 'Freelance Practice', company: 'Studio EP', period: '2018  →  Now' },
+    { role: 'Digital Marketing Mgr', company: 'Agency X', period: '2022  →  Now' },
+    { role: 'Marketing Specialist', company: 'Brand Co.', period: '2019  →  2022' },
+    { role: 'Junior Marketing', company: 'StartupY', period: '2016  →  2019' },
   ]
 
   return (
@@ -594,7 +594,7 @@ function About() {
             >
               <img
                 src="https://framerusercontent.com/images/zRVCa2eOgJIf1mJK5PYcBLrYI.png"
-                alt="Joris van Dijk"
+                alt="Ezio Pappalardo"
                 className="w-full h-full object-cover"
               />
             </motion.div>
@@ -602,7 +602,7 @@ function About() {
             {/* Info Card */}
             <div className="flex items-center justify-between">
               <div className="text-right flex-1">
-                <p className="font-semibold">Joris van Dijk</p>
+                <p className="font-semibold">Ezio Pappalardo</p>
               </div>
             </div>
 
@@ -625,7 +625,7 @@ function About() {
                   </svg>
                 </a>
               </div>
-              <p className="text-sm text-black/50">Hanzo Studio, Founder</p>
+              <p className="text-sm text-black/50">Digital Marketing Manager</p>
             </div>
           </motion.div>
 
@@ -640,7 +640,7 @@ function About() {
             {/* Bio */}
             <div className="flex items-start gap-4">
               <p className="text-lg sm:text-xl leading-relaxed text-black/80 flex-1">
-                Joris van Dijk is a Dutch designer known for his minimalist, expressive digital work. He helps startups and studios create clean interfaces and strong branding. Based in Utrecht, he blends function with emotion — and often spends his free time cycling or exploring generative art.
+                Ezio Pappalardo is an Italian creative known for his minimalist, expressive digital work. He helps startups and brands create clean interfaces and strong branding. Based in Italy, he blends function with emotion — and often spends his free time exploring design and generative art.
               </p>
               {/* Smiley Icon */}
               <svg className="w-10 h-10 text-[#FF3700] flex-shrink-0 hidden sm:block" viewBox="0 0 256 256" fill="currentColor">
@@ -1012,7 +1012,7 @@ function FAQ() {
     },
     {
       question: 'Do you offer development too?',
-      answer: 'Joris focuses on design only, but all deliverables are dev-ready. He can also recommend trusted no-code or Webflow/Framer developers if needed.'
+      answer: 'Ezio focuses on design only, but all deliverables are dev-ready. He can also recommend trusted no-code or Webflow/Framer developers if needed.'
     }
   ]
 
@@ -1058,7 +1058,7 @@ function FAQ() {
               <div className="w-20 h-20 rounded-full overflow-hidden mb-4">
                 <img
                   src="https://framerusercontent.com/images/zRVCa2eOgJIf1mJK5PYcBLrYI.png"
-                  alt="Joris van Dijk"
+                  alt="Ezio Pappalardo"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -1085,8 +1085,8 @@ function FAQ() {
               {/* Email */}
               <p className="text-sm text-center">
                 Or, email me at{' '}
-                <a href="mailto:joris@hanzo.com" className="underline hover:text-[#FF3700] transition-colors">
-                  joris@hanzo.com
+                <a href="mailto:ezio@objects.design" className="underline hover:text-[#FF3700] transition-colors">
+                  ezio@objects.design
                 </a>
               </p>
             </div>
@@ -1148,10 +1148,10 @@ function FAQ() {
 }
 
 
-// Footer - Framer Style with sticky reveal effect
+// Footer - Framer Style
 function Footer() {
   return (
-    <footer className="sticky bottom-0 left-0 right-0 -z-10">
+    <footer className="relative">
       {/* Main Footer Container with 8px border */}
       <div
         className="mx-4 sm:mx-6 mb-4 rounded-3xl overflow-hidden relative"
@@ -1261,7 +1261,7 @@ function Footer() {
           <div className="mt-20 pt-8" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.5)' }}>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
               {/* Copyright */}
-              <p className="text-white text-sm">© Hanzo Studio, 2025</p>
+              <p className="text-white text-sm">© Ezio Pappalardo, 2025</p>
 
               {/* Social Links */}
               <div className="flex items-center gap-3">
@@ -1341,22 +1341,17 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen relative">
-      {/* Main content wrapper with background */}
-      <div className="relative z-10 bg-[#E8E8E8]">
-        <Header />
-        <Hero />
-        <Services />
-        <LogoTicker />
-        <ImageShowcase />
-        <About />
-        <Process />
-        <Work />
-        <Pricing />
-        <FAQ />
-        {/* Spacer for sticky footer reveal */}
-        <div className="h-[500px]" />
-      </div>
+    <div className="min-h-screen bg-[#E8E8E8]">
+      <Header />
+      <Hero />
+      <Services />
+      <LogoTicker />
+      <ImageShowcase />
+      <About />
+      <Process />
+      <Work />
+      <Pricing />
+      <FAQ />
       <Footer />
     </div>
   )
