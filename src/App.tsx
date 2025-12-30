@@ -593,7 +593,7 @@ function About() {
               className="aspect-[3/2] rounded-2xl overflow-hidden border border-black/10 shadow-lg"
             >
               <img
-                src="https://framerusercontent.com/images/zRVCa2eOgJIf1mJK5PYcBLrYI.png"
+                src="/profile.webp"
                 alt="Ezio Pappalardo"
                 className="w-full h-full object-cover"
               />
@@ -1057,7 +1057,7 @@ function FAQ() {
               {/* Photo */}
               <div className="w-20 h-20 rounded-full overflow-hidden mb-4">
                 <img
-                  src="https://framerusercontent.com/images/zRVCa2eOgJIf1mJK5PYcBLrYI.png"
+                  src="/profile.webp"
                   alt="Ezio Pappalardo"
                   className="w-full h-full object-cover"
                 />
